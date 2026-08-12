@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import notificacaoRoutes from './routes/notificacaoRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import { authMiddleware } from './middlewares/authMiddleware.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 dotenv.config();
@@ -11,8 +13,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Rotas da API
-app.use('/api/notificacoes', notificacaoRoutes);
+// Rota pública de Autenticação (Registro e Login)
+app.use('/api/auth', authRoutes);
+
+// Rotas Protegidas (Exigem o Token JWT no cabeçalho Authorization)
+app.use('/api/notificacoes', authMiddleware, notificacaoRoutes);
 
 // Middleware de erros
 app.use(errorHandler);
