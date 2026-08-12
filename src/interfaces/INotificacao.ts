@@ -29,3 +29,14 @@ export interface INotificacaoInput {
   dt_resultado?: string;
   dt_recebimento?: string;
 }
+
+export interface INotificacaoFiltros {
+  nome?: string;
+  localidade?: string;
+  status?: string;
+  ano?: number;
+  mes?: number;
+  dataInicio?: string;
+  dataFim?: string;
+  resultado?: string;
+}
