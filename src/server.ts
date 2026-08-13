@@ -5,6 +5,7 @@ import notificacaoRoutes from './routes/notificacaoRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import { authMiddleware } from './middlewares/authMiddleware.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import localidadeRoutes from './routes/localidadeRoutes.js';
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ app.use('/api/auth', authRoutes);
 
 // Rotas Protegidas (Exigem o Token JWT no cabeçalho Authorization)
 app.use('/api/notificacoes', authMiddleware, notificacaoRoutes);
+
+app.use('/api/localidades', localidadeRoutes);
 
 // Middleware de erros
 app.use(errorHandler);
